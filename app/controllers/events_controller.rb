@@ -1,8 +1,11 @@
+require 'date'
+
 class EventsController < ApplicationController
   before_action :find_event, only: [:show]
   def index
-    @events = Event.all
-    @events = @events.where("eventstart = #{params[:date]}")
+    # @events = Event.where("#{eventstart.to_date.strftime('%Y-%m-%e') == '%#{params[:date]}%'}")
+    # @events = Event.where(eventstart: Date.parse(params[:date]))
+    @events = Event.all.select { |event| params[:date] == event.eventstart.to_s.split(" ").first }
   end
 
   def show
@@ -14,6 +17,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    raise
     if @event.save
       redirect_to event_path(@event)
     else
