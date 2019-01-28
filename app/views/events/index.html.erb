@@ -1,3 +1,6 @@
 <% @events.each do |event| %>
-  <p><%= event %></p>
+  <p><%= event.title %></p>
+  <p><%= event.description %></p>
+  <p><%= event.eventstart.to_s.split(" ").first %></p>
 <% end %>
+<%= link_to "Back", root_path %>

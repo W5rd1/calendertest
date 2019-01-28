@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'calendar/show'
   root to: "calendar#show"
   resources :events
   resources :calendar, only: [:show]
