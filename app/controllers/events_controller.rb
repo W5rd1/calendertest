@@ -3,9 +3,9 @@ require 'date'
 class EventsController < ApplicationController
   before_action :find_event, only: [:show]
   def index
-    # @events = Event.where("#{eventstart.to_date.strftime('%Y-%m-%e') == '%#{params[:date]}%'}")
-    # @events = Event.where(eventstart: Date.parse(params[:date]))
+    @title = ""
     @events = Event.all.select { |event| params[:date] == event.eventstart.to_s.split(" ").first }
+    @events[0]? @title = "Your events for the day" : @title = "You have no events on this day"
   end
 
   def show
